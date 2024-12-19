@@ -1,0 +1,31 @@
+:root {
+    --primary-color: #6C63FF;
+    --secondary-color: #FF6584;
+    --accent-color-1: #4CAF50;
+    --accent-color-2: #FFC107;
+    --text-color: #333;
+    --bg-color: #F0F2F5;
+    --card-bg: #FFFFFF;
+    --sidebar-bg: #2C3E50;
+    --sidebar-text: #ECF0F1;
+    --misleading-color: #FF9800;
+    --upgrade-color: #FFD700;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--bg-color);
+}
+
+.dashboard {
+    display: flex;
+    min-height: 100vh;
+}

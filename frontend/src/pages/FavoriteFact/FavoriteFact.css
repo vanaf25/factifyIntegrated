@@ -1,0 +1,86 @@
+h2, h3 {
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    font-size: 2rem;
+}
+
+.favorites-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+
+.fact-box {
+    background-color: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: box-shadow 0.3s ease;
+}
+
+.fact-box:hover {
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+.fact-title {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: var(--primary-color);
+}
+
+.fact-status {
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+}
+
+.fact-status.true {
+    color: var(--accent-color-1);
+}
+
+.fact-status.false {
+    color: var(--secondary-color);
+}
+
+.fact-status.partially-true {
+    color: var(--accent-color-2);
+}
+
+.fact-status.misleading {
+    color: var(--misleading-color);
+}
+
+.fact-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+}
+
+.fact-actions button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: color 0.3s ease;
+}
+
+.favorite-btn:hover, .share-btn:hover {
+    color: #6C63FF;
+}
+
+.favorite-btn {
+    color: #FFD700;
+}
+
+.share-btn {
+    color: #888;
+}
+
+@media (max-width: 768px) {
+    .favorites-container {
+        grid-template-columns: 1fr;
+    }
+}

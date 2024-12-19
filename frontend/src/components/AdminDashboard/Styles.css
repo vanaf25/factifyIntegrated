@@ -1,0 +1,15 @@
+.logo {
+    padding: 1rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-align: center;
+    white-space: nowrap;
+}
+.logo-Factify {
+    color: #FFFFFF; /* Changed to white */
+}
+.logo-gpt {
+    background: linear-gradient(45deg, #6C63FF, #FF6584, #FFC107);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}

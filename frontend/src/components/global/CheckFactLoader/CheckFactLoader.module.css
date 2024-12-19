@@ -1,0 +1,88 @@
+.loading-container {
+    display: none;
+    margin-top: 2rem;
+}
+
+.progress-wrapper {
+    position: relative;
+    margin-bottom: 1.5rem;
+}
+
+.progress-bar {
+    height: 6px;
+    background: #eee;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.progressFill {
+    height:5px;
+    width: 0%;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    transition: width 0.5s ease;
+}
+
+.progressStatus {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.5rem;
+    font-size: 0.875rem;
+    color: #666;
+}
+
+/* Loading Stages */
+.loadingStages {
+    display: flex;
+    justify-content: space-between;
+    margin: 2rem 0;
+}
+
+.stage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    position: relative;
+}
+
+.stage:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    top: 15px;
+    right: -50%;
+    width: 100%;
+    height: 2px;
+    background: #eee;
+    z-index: 0;
+}
+
+.stageIcon {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #eee;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.5rem;
+    position: relative;
+    z-index: 1;
+    transition: all 0.3s ease;
+}
+
+.active .stageIcon {
+    background: var(--primary-color);
+    color: white;
+    transform: scale(1.1);
+}
+
+.completed .stageIcon {
+    background: var(--success-color);
+    color: white;
+}
+
+.stageLabel {
+    font-size: 0.875rem;
+    color: #666;
+    text-align: center;
+}

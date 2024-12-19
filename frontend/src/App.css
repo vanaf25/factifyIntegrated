@@ -1,0 +1,43 @@
+:root {
+  --primary-color: #6C63FF;
+  --secondary-color: #FF6584;
+  --accent-color-1: #4CAF50;
+  --success-color: #4CAF50;
+  --accent-color-2: #FFC107;
+  --text-color: #333;
+  --bg-color: #F0F2F5;
+  --card-bg: #FFFFFF;
+  --sidebar-bg: #2C3E50;
+  --sidebar-text: #ECF0F1;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: 'Roboto', sans-serif;
+  line-height: 1.6;
+  color: var(--text-color);
+  background-color: var(--bg-color);
+}
+.dashboard {
+  display: flex;
+  min-height: 100vh;
+}
+.main-content {
+  flex-grow: 1;
+  padding: 2rem 1rem 0 0;
+  margin-left: 70px;
+  overflow-y: auto;
+}
+@media (max-width:600px) {
+  .main-content{
+    margin-left: 0;
+    padding: 3.5rem 1rem 0 1rem;
+  }
+
+}
+.dashboardContent{
+  margin-left: 190px !important;
+}

@@ -1,0 +1,6 @@
+.ag-theme-quartz,
+.ag-theme-alpine,
+.ag-theme-quartz-dark {
+    --ag-header-foreground-color:white;
+    --ag-header-background-color: var(--primary-color);
+}

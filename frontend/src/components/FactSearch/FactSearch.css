@@ -1,0 +1,77 @@
+.search-container {
+    background-color: var(--card-bg);
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    margin-bottom: 2rem;
+}
+h2, h3 {
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    font-size: 2rem;
+}
+.fact-check-result h3 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+.result-item {
+    margin-bottom: 1rem;
+}
+.result-item h4 {
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+.result-item p {
+    color: #666;
+    margin-bottom: 0.5rem;
+}
+.rating, .severity {
+    font-weight: bold;
+}
+.rating.true {
+    color: var(--accent-color-1);
+}
+.rating.false {
+    color: var(--secondary-color);
+}
+.rating.partially-true {
+    color: var(--accent-color-2);
+}
+.severity.high {
+    color: var(--secondary-color);
+}
+.key-facts {
+    margin-top: 1rem;
+}
+.key-facts li {
+    margin-bottom: 0.5rem;
+}
+.reference-section {
+    margin-top: 1rem;
+}
+.reference-section h4 {
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+.reference-section ul {
+    list-style-type: disc;
+    padding-left: 1.5rem;
+}
+.reference-section ul li {
+    margin-bottom: 0.5rem;
+}
+.reference-section ul li a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+.reference-section ul li a:hover {
+    color: var(--secondary-color);
+}
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+.fade-in {
+    animation: fadeIn 0.5s ease-in;
+}
