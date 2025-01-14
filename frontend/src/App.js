@@ -52,7 +52,6 @@ function App() {
                         <Route path="/" element={<PrivateRoute><FactSearch /></PrivateRoute>} />
                         <Route path="/favorites" element={<PrivateRoute><FavoriteFact /></PrivateRoute>} />
                         <Route path="/upgrade" element={<PrivateRoute><UpgradePlan /></PrivateRoute>} />
-                        <Route path="/upgrade/pay/:id" element={<PrivateRoute><PaymentPage /></PrivateRoute>} />
                         <Route path="/settings" element={<PrivateRoute><Settings /></PrivateRoute>} />
 
                         {/* Admin-only Routes */}

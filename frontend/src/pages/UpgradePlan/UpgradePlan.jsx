@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import './UpgradePlan.css'
 import Form from "../../components/Form/Form";
@@ -14,10 +13,69 @@ const plans = [
         link:"starter",
         price: 1,
         credits: "10 Credits",
-        checksPerMinute: "5 Checks Per Minute",
         features: [
             "Advanced Algorithm Analysis",
-            "Comprehensive Explanations (200-300 words)",
+            "Comprehensive Explanations (50-150 words)",
+            "Multi-Source Verification",
+            "Clear Ratings & Severity Assessment",
+            "Continuous Learning",
+            "Secure Authentication",
+            "Priority Support"
+        ],
+        paymentLinks:{
+            month:"bIYaEJbpu3VOgMMdQR",
+            year:"cN27sx516eAs2VW8wC"
+        }
+    },
+    {
+        name: "Pro Plan",
+        price: 8,
+        credits: "100 Credits",
+        link:"pro",
+        features: [
+            "Advanced Algorithm Analysis",
+            "Comprehensive Explanations (50-150 words)",
+            "Multi-Source Verification",
+            "Clear Ratings & Severity Assessment",
+            "Continuous Learning",
+            "Secure Authentication",
+            "Priority Support"
+        ],
+        paymentLinks:{
+            month:"3csfZ3fFK0JCeEE7su",
+            year:"dR63chalqcskdAAcMR"
+        }
+    },
+    {
+        name: "Business Plan",
+        link:"business",
+        price: 15,
+        credits: "500 Credits",
+        features: [
+            "Advanced Algorithm Analysis",
+            "Comprehensive Explanations (50-150 words)",
+            "Multi-Source Verification",
+            "Clear Ratings & Severity Assessment",
+            "Continuous Learning",
+            "Secure Authentication",
+            "Priority Support"
+        ],
+        paymentLinks:{
+            month:"3csdQV2SY7805449AD",
+            year:"aEU1498dibog1RS148"
+        }
+    }
+];
+/*
+const plans = [
+    {
+        name: "Starter Plan",
+        link:"starter",
+        price: 1,
+        credits: "10 Credits",
+        features: [
+            "Advanced Algorithm Analysis",
+            "Comprehensive Explanations (50-150 words)",
             "Multi-Source Verification",
             "Clear Ratings & Severity Assessment",
             "Continuous Learning",
@@ -34,10 +92,9 @@ const plans = [
         price: 8,
         credits: "100 Credits",
         link:"pro",
-        checksPerMinute: "5 Checks Per Minute",
         features: [
             "Advanced Algorithm Analysis",
-            "Comprehensive Explanations (200-300 words)",
+            "Comprehensive Explanations (50-150 words)",
             "Multi-Source Verification",
             "Clear Ratings & Severity Assessment",
             "Continuous Learning",
@@ -54,10 +111,9 @@ const plans = [
         link:"business",
         price: 15,
         credits: "500 Credits",
-        checksPerMinute: "5 Checks Per Minute",
         features: [
             "Advanced Algorithm Analysis",
-            "Comprehensive Explanations (200-300 words)",
+            "Comprehensive Explanations (50-150 words)",
             "Multi-Source Verification",
             "Clear Ratings & Severity Assessment",
             "Continuous Learning",
@@ -70,6 +126,7 @@ const plans = [
         }
     }
 ];
+*/
 const UpgradePlan = () => {
     const [isPopupOpen, setIsPopupOpen] = useState(false);
     const [isApplying,setIsApplying]=useState(false)
@@ -219,7 +276,6 @@ const UpgradePlan = () => {
                                     }`}
                                 >
                                     <li className="mb-2">{plan.credits}</li>
-                                    <li className="mb-2">{plan.checksPerMinute}</li>
                                     {plan.features.map((feature, featureIndex) => (
                                         <li key={featureIndex} className="mb-2">{feature}</li>
                                     ))}

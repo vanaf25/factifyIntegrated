@@ -5,6 +5,23 @@ import { UserService } from "../user/user.service";
 import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
 import { SubscriptionDocument } from "./entities/stripe.entity";
+// Real keys
+const plans = {
+  pro: {
+    month: "price_1QWdQNDPaR2OOfkxdzSluJdx",
+    year: "price_1QTaKHDPaR2OOfkxlbgLUkNB",
+  },
+  business: {
+    month: "price_1QWdQNDPaR2OOfkxdzSluJdx",
+    year: "price_1QTaOiDPaR2OOfkxhweafam9",
+  },
+  starter:{
+    month:"price_1QWdOFDPaR2OOfkxKZM4TIuG",
+    year:"price_1QTaPYDPaR2OOfkxZIB9SOg8"
+  }
+};
+//Tested My Data
+/*
 const plans = {
   pro: {
     month: "price_1QG4w0G7nspIT2aidFBG57Bh",
@@ -19,9 +36,11 @@ const plans = {
     year:"price_1QGsQFG7nspIT2ain1dvLmJH"
   }
 };
+*/
 @Injectable()
 export class StripeService {
   private stripe: Stripe;
+  private readonly webhookSecret: string; // Declare webhookSecret as a private readonly property
 
   constructor(
     @InjectModel('Subscription') private readonly subscriptionModel:
@@ -32,6 +51,7 @@ export class StripeService {
     this.stripe = new Stripe(this.configService.get<string>('STRIPE_SECRET_KEY'), {
       apiVersion: '2024-09-30.acacia',
     });
+    this.webhookSecret = this.configService.get<string>('STRIPE_WEBHOOK_SECRET'); // Initialize webhookSecret
   }
 
   async createCustomerIfNotExists(userId: string, paymentMethod: string) {
@@ -60,21 +80,6 @@ export class StripeService {
     if (user.subscription === plan && user.subscriptionType===type) {
       throw new BadRequestException("You have already activated this plan!");
     }
-
-    const plans = {
-      pro: {
-        month: "price_1QG4w0G7nspIT2aidFBG57Bh",
-        year: "price_1QGm09G7nspIT2aiqMGA0n0X",
-      },
-      business: {
-        month: "price_1QGS4zG7nspIT2aisrIpFFEA",
-        year: "price_1QGlzMG7nspIT2aiNet5M2n3",
-      },
-      starter:{
-        month:"price_1QGsPpG7nspIT2aiXhdoCh06",
-        year:"price_1QGsQFG7nspIT2ain1dvLmJH"
-      }
-    };
     const priceId = plans[plan][type];
     const subscription = await this.stripe.subscriptions.create({
       customer: customerId,
@@ -156,7 +161,8 @@ export class StripeService {
         case 'invoice.payment_failed': {
           const invoice = event.data.object as Stripe.Invoice;
           const subscriptionId = invoice.subscription;
-
+          const priceId = invoice?.lines?.data[0]?.price?.id;
+          console.log('inovice:',priceId);
           console.log(`Payment failed for subscription ${subscriptionId}`);
           // Call service to update user subscription status
           break;

@@ -43,8 +43,8 @@ export class StripeController {
     @Req() req: Request, @Res() res: Response,
     @Headers('stripe-signature') signature: string,
   ): Promise<void> {
+    console.log('endpoint secret: ',this.webhookSecret);
     let event: Stripe.Event;
-
     try {
       event = this.stripe.webhooks.constructEvent(req.body, signature as string, this.webhookSecret);
     } catch (err) {

@@ -75,7 +75,7 @@ const SideBar = () => {
                                 <span>Settings</span>
                             </div>
                         </Link>
-                        {user?.role==="admin" ? <Link to={"/dashboard/users"}>
+                        {user?.role==="admin" ? <Link to={"/dashboard/manageUsers"}>
                             <div className="sidebar-item">
                                 <i className="fa fa-dashboard"></i>
                                 <span>Dashboard</span>

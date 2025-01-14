@@ -26,7 +26,7 @@ export class UserService {
     private configService: ConfigService,
   ) {
     this.brevoClient = new SibApiV3Sdk.TransactionalEmailsApi();
-        SibApiV3Sdk.ApiClient.instance.authentications["api-key"].apiKey =this.configService.get<string>('BREVO_API_KEY');
+    SibApiV3Sdk.ApiClient.instance.authentications["api-key"].apiKey =this.configService.get<string>('BREVO_API_KEY');
   }
   async findByStripeCustomerId(customerId: string): Promise<any | null> {
     return this.userModel.findOne({ stripeCustomerId: customerId }).exec();
@@ -296,25 +296,11 @@ export class UserService {
     return user
   }
   async sendWelcomeEmail(email: string, name: string) {
-    console.log('method!!!');
-    const emailOptions = {
-      to: [{ email }],
-      sender: { name: "Factify Support", email: "vanayfefilov777@gmail.com" },
-      subject: "Welcome to Factify!",
-      htmlContent: `
+    await this.emailTemplate(email,`Welcome to Factify!`,`
         <p>Hello ${name},</p>
         <p>Welcome to Factify! We're glad to have you with us.</p>
         <p>Enjoy discovering new facts!</p>
-      `
-    };
-    try {
-      console.log('somethind!!');
-      await this.brevoClient.sendTransacEmail(emailOptions);
-      console.log('sended!!!');
-    } catch (error) {
-      console.log('e:', error);
-      throw new BadRequestException("Failed to send welcome email");
-    }
+      `);
   }
   async cancelSubscription(userId:string){
     const u=await this.findById2(userId);
@@ -333,44 +319,18 @@ export class UserService {
     return u;
   }
   async sendConfirmationSubscriptionEmail(email: string, name: string,planData:any) {
-    const emailOptions = {
-      to: [{ email }],
-      sender: { name: "Factify Support", email: "vanayfefilov777@gmail.com" },
-      subject: `You activate a ${planData.plan}`,
-      htmlContent: `
+    await this.emailTemplate(email,`You activate a ${planData.plan}`,`
         <p>Hello ${name},</p>
         <p>Based on your ${planData.plan} plan, You will receive every month
          a ${planData.credits} credits!</p>
          <p>You will must to pay for this subscription every ${planData.type}</p>
-      `
-    };
-    try {
-      console.log('somethind!!');
-      await this.brevoClient.sendTransacEmail(emailOptions);
-      console.log('sended!!!');
-    } catch (error) {
-      console.log('e:', error);
-      throw new BadRequestException("Failed to send welcome email");
-    }
+      `)
   }
   async sendSubscriptionEmail(email: string, name: string,planData:any) {
-    const emailOptions = {
-      to: [{ email }],
-      sender: { name: "Factify Support", email: "vanayfefilov777@gmail.com" },
-      subject: `You recevied the credits!`,
-      htmlContent: `
+    await this.emailTemplate(email,"You recevied the credits!",`
         <p>Hello ${name},</p>
         <p>Based on your ${planData.plan} plan You received a ${planData.credits} credits!</p>
-      `
-    };
-    try {
-      console.log('somethind!!');
-      await this.brevoClient.sendTransacEmail(emailOptions);
-      console.log('sended!!!');
-    } catch (error) {
-      console.log('e:', error);
-      throw new BadRequestException("Failed to send welcome email");
-    }
+      `)
   }
   async create(
     name: string,
@@ -487,14 +447,18 @@ export class UserService {
   }
   async sendResetEmail(email: string, token: string) {
     const resetUrl = `https://factify-ochre.vercel.app/reset-password/${token}`;
-    const emailOptions = {
-      to: [{ email }],
-      sender: { name: "Factify Support", email: "vanayfefilov777@gmail.com" }, // Update with your email domain
-      subject: "Password Reset Request",
-      htmlContent: `
+    const content=`
         <p>You requested a password reset. Click <a href="${resetUrl}">here</a> to reset your password.</p>
         <p>If you didn’t request this, please ignore this email.</p>
       `
+    await this.emailTemplate(email,"Password Reset Request",content)
+  }
+  async emailTemplate(email:string,subject:string,content:string){
+    const emailOptions = {
+      to: [{ email }],
+      sender: { name: "Factify Support", email: "noreply@factifygpt.com" }, // Update with your email domain
+      subject: subject,
+      htmlContent: content
     };
     try {
       await this.brevoClient.sendTransacEmail(emailOptions);
@@ -502,4 +466,5 @@ export class UserService {
       console.log('e:',error);
       throw new BadRequestException("Failed to send reset email");
     }
-  }}
+  }
+}
